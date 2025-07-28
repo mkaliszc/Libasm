@@ -26,7 +26,7 @@ OBJ_DIR = obj
 SRC_DIR = .
 
 # Fichiers sources assembleur
-ASM_FILES = main ft_strlen ft_strcpy
+ASM_FILES = main ft_strlen ft_strcpy ft_write
 ASM_SRC = $(addsuffix .s, $(ASM_FILES))
 ASM_OBJS = $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(ASM_FILES)))
 

@@ -9,6 +9,7 @@ section .bss
 section .text
     extern ft_strlen
     extern ft_strcpy
+    extern ft_write
     global _start
 
 _start:
@@ -44,7 +45,7 @@ _start:
     mov rdx, 1
     syscall
 
-; * ft_strcpy *
+; * ft_strcpy + ft_write*
 
     mov rdi, copy_str
     mov rsi, test_string
@@ -54,7 +55,7 @@ _start:
     mov rdi, 1
     mov rsi, copy_str
     mov rdx, 5
-    syscall
+    call ft_write
 
     mov rax, 1
     mov rdi, 1
