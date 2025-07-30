@@ -1,6 +1,7 @@
 section .data
 
 section .text
+	extern __errno_location
 	global ft_write
 
 ft_write:
@@ -11,5 +12,9 @@ ft_write:
 	ret
 
 error:
+	neg rax
+	mov rdx, rax
+	call __errno_location
+	mov [rax], rdx
 	mov rax, -1
 	ret

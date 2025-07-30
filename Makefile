@@ -1,4 +1,5 @@
 NAME = asm
+LIBNAME = libasm.a
 
 # Couleurs pour l'affichage
 LCYAN = \033[1;36m
@@ -13,22 +14,27 @@ INFO = $(LCYAN)/INFO/$(RESET)
 CLEANING = $(LRED)[DELETING]$(RESET)
 SUCCESS = $(LGREEN)[SUCCESS]$(RESET)
 
-# Outils assembleur
+# Outils
 ASM = nasm
-LD = ld
+CC = gcc
+AR = ar
 
 # Flags
 ASMFLAGS = -f elf64 -g
-LDFLAGS = -m elf_x86_64
+CFLAGS = -Wall -Wextra -Werror -no-pie
+ARFLAGS = rcs
 
 # Répertoires
 OBJ_DIR = obj
 SRC_DIR = .
 
-# Fichiers sources assembleur
-ASM_FILES = main ft_strlen ft_strcpy ft_write
-ASM_SRC = $(addsuffix .s, $(ASM_FILES))
-ASM_OBJS = $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(ASM_FILES)))
+# Fichiers sources
+LIB_FILES = ft_strlen ft_strcpy ft_write
+C_MAIN_FILES = main
+
+# Objects
+LIB_OBJS = $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(LIB_FILES)))
+C_MAIN_OBJS = $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(C_MAIN_FILES)))
 
 all: $(NAME)
 
@@ -37,9 +43,18 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.s
 	@echo "$(INFO) $(PURPLE)Assembling $<$(RESET)"
 	@$(ASM) $(ASMFLAGS) $< -o $@
 
-$(NAME): $(ASM_OBJS)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	@echo "$(INFO) $(GREEN)Compiling $<$(RESET)"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(LIBNAME): $(LIB_OBJS)
+	@echo "$(INFO) $(GREEN)Creating library $(LIBNAME)$(RESET)"
+	@$(AR) $(ARFLAGS) $(LIBNAME) $(LIB_OBJS)
+
+$(NAME): $(LIBNAME) $(C_MAIN_OBJS)
 	@echo "$(INFO) $(GREEN)Linking $(NAME)$(RESET)"
-	@$(LD) $(LDFLAGS) -o $(NAME) $(ASM_OBJS)
+	@$(CC) -o $(NAME) $(C_MAIN_OBJS) -L. -lasm
 	@echo "$(SUCCESS) $(NAME) created!"
 
 clean:
@@ -48,7 +63,8 @@ clean:
 
 fclean: clean
 	@echo "$(CLEANING) $(GRAY)$(NAME) executable$(RESET)"
-	@rm -f $(NAME)
+	@echo "$(CLEANING) $(GRAY)$(LIBNAME) library$(RESET)"
+	@rm -f $(NAME) $(LIBNAME)
 
 re: fclean all
 
