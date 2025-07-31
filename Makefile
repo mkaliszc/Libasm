@@ -20,8 +20,8 @@ CC = gcc
 AR = ar
 
 # Flags
-ASMFLAGS = -f elf64 -g
-CFLAGS = -Wall -Wextra -Werror -g
+ASMFLAGS = -f elf64 -g 
+CFLAGS = -Wall -Wextra -Werror -g -fPIE
 ARFLAGS = rcs
 
 # Répertoires
@@ -29,7 +29,7 @@ OBJ_DIR = obj
 SRC_DIR = .
 
 # Fichiers sources
-LIB_FILES = ft_strlen ft_strcpy ft_write
+LIB_FILES = ft_strlen ft_strcpy ft_write ft_strcmp ft_read
 C_MAIN_FILES = main
 
 # Objects
@@ -54,7 +54,7 @@ $(LIBNAME): $(LIB_OBJS)
 
 $(NAME): $(LIBNAME) $(C_MAIN_OBJS)
 	@echo "$(INFO) $(GREEN)Linking $(NAME)$(RESET)"
-	@$(CC) -o $(NAME) $(C_MAIN_OBJS) -L. -lasm
+	@$(CC) -o $(NAME) $(C_MAIN_OBJS) -L. -lasm -fPIE
 	@echo "$(SUCCESS) $(NAME) created!"
 
 clean:
@@ -68,4 +68,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re $(LIBNAME)

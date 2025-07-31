@@ -9,14 +9,24 @@ ft_strcmp:
 	jmp loop
 
 loop:
-	cmp byte [rdi + rcx], [rsi + rcx]
-	jne return
+	mov al, [rdi + rcx]
+	mov dl, [rsi + rcx]
+	cmp byte al, dl
+	jg return_greater
+	jl return_lesser
+	cmp byte [rdi + rcx], 0
+	je nul_found 
 	inc rcx
-	je loop
+	jmp loop
 
-return:
-	movzx rax, [rdi + rcx]
-	movzx rdx, [rsi + rcx]
-	sub rax, rdx
+nul_found:
+	mov rax, 0
 	ret
 
+return_greater:
+	mov rax, 1
+	ret
+
+return_lesser:
+	mov rax, -1
+	ret
