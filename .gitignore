@@ -1,3 +1,4 @@
 libasm.a
 obj/
 asm
+*.o

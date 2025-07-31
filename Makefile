@@ -21,7 +21,7 @@ AR = ar
 
 # Flags
 ASMFLAGS = -f elf64 -g
-CFLAGS = -Wall -Wextra -Werror -no-pie
+CFLAGS = -Wall -Wextra -Werror -g
 ARFLAGS = rcs
 
 # Répertoires
