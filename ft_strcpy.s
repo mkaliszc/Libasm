@@ -9,9 +9,9 @@ ft_strcpy:
 	jmp loop
 
 loop:
-	cmp byte [rsi + rcx], 0
 	mov dl, [rsi + rcx]
-	mov[rdi + rcx], dl
+	mov [rdi + rcx], dl
+	cmp byte [rsi + rcx], 0
 	je exit
 	inc rcx
 	jmp loop

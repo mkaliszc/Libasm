@@ -29,7 +29,7 @@ OBJ_DIR = obj
 SRC_DIR = .
 
 # Fichiers sources
-LIB_FILES = ft_strlen ft_strcpy ft_write ft_strcmp ft_read
+LIB_FILES = ft_strlen ft_strcpy ft_write ft_strcmp ft_read ft_strdup
 C_MAIN_FILES = main
 
 # Objects

@@ -2,3 +2,4 @@ libasm.a
 obj/
 asm
 *.o
+.vscode
