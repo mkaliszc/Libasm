@@ -16,12 +16,12 @@ SUCCESS = $(LGREEN)[SUCCESS]$(RESET)
 
 # Outils
 ASM = nasm
-CC = gcc
+CC = cc
 AR = ar
 
 # Flags
-ASMFLAGS = -f elf64 -g 
-CFLAGS = -Wall -Wextra -Werror -g -fPIE
+ASMFLAGS = -felf64 -g 
+CFLAGS = -Wall -Wextra -Werror -g
 ARFLAGS = rcs
 
 # Répertoires
