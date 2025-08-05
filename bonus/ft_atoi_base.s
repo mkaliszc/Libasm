@@ -11,89 +11,58 @@ validate_base:
 	je error
 
 	mov rdi, rsi
-
 	call ft_strlen
 	cmp rax, 2
 	jl error
 	mov r15, rax
 
 	xor rcx, rcx
-	call check_whitespace
-	cmp rax, 0
-	je exit
 
-	xor rcx, rcx
-	call check_dup
-	cmp rax, 0
-	je exit
-
-	mov rcx, 0
-	call check_special_char
-	cmp rax, 0
-	je exit
-
-check_dup:
-	cmp byte [rdi + rcx], 0
-	je step_successs
-
-	mov rdx, rcx           
-	inc rdx
-	jmp inner_loop
-
-inner_loop:
-	cmp byte [rdi + rdx], 0
-	je next_char
-
+main_validation_loop:
 	mov al, [rdi + rcx]
+	cmp al, 0
+	je validation_success
+
+	; whitespace
+	cmp al, 32
+	je error
+	cmp al, 9
+	je error
+	cmp al, 10
+	je error
+	cmp al, 11
+	je error
+	cmp al, 12
+	je error
+	cmp al, 13
+	je error
+
+	; sign
+	cmp al, 43
+	je error
+	cmp al, 45
+	je error
+
+	push rcx
+	mov rdx, rcx
+	inc rdx
+
+check_duplicates:
+	cmp byte [rdi + rdx], 0
+	je no_duplicate_found
+
 	cmp al, [rdi + rdx]
 	je error
 
 	inc rdx
-	jmp inner_loop
+	jmp check_duplicates
 
-next_char:
+no_duplicate_found:
+	pop rcx
 	inc rcx
-	jmp check_dup
+	jmp main_validation_loop
 
-check_whitespace: ; * Loop to check for wwhitespace in the base
-	cmp byte [rdi + rcx], 0
-	je step_successs
-
-	cmp byte [rdi + rcx], 32
-	je error
-
-	cmp byte [rdi + rcx], 9
-	je error
-
-	cmp byte [rdi + rcx], 10
-	je error
-
-	cmp byte [rdi + rcx], 11
-	je error
-
-	cmp byte [rdi + rcx], 12
-	je error
-
-	cmp byte [rdi + rcx], 13
-	je error
-
-	inc rcx
-	jmp check_whitespace
-
-check_special_char:
-	cmp byte [rdi + rcx], 0
-	je step_successs
-
-	cmp byte [rdi + rcx], 43
-	je error
-
-	cmp byte [rdi + rcx], 45
-	je error
-
-	inc rcx
-	jmp check_special_char
-
-step_successs: 
+validation_success:
 	mov rax, 1
 	ret
 
@@ -128,6 +97,8 @@ atoi_loop:
 
 	jmp handle_char
 
+; Function to handle each atoi case
+
 not_find:
 	mov r11, -1
 	ret
@@ -146,8 +117,6 @@ find_char_in_base: ; we search for the base index and stock it in r11b
 	inc rdx
 	jmp find_char_in_base
 
-; Function to handle each atoi case
-
 handle_plus:
 	inc rcx
 	mov r8w, 1
@@ -155,7 +124,7 @@ handle_plus:
 
 handle_sub:
 	inc rcx
-	mov r8w, -1
+	neg r8w
 	jmp atoi_loop
 
 handle_char:

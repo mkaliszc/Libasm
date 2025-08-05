@@ -47,7 +47,7 @@ int main(void)
 	free(dup_str);
 	free(dup_str_real);
 
-	printf(GREEN"ft_atoi_base : "ITALIC YELLOW "%d\n\n", ft_atoi_base("-ff", "0123456789abcdef"));
+	printf(GREEN"ft_atoi_base : "ITALIC YELLOW "%d\n\n", ft_atoi_base("+++++++-ff", "0123456789abcdef"));
 
 	printf(LRED "=== TESTS D'ERREUR ===" RESET "\n\n");
 
