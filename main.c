@@ -47,12 +47,15 @@ int main(void)
 	free(dup_str);
 	free(dup_str_real);
 
-	printf(GREEN"ft_atoi_base : "ITALIC YELLOW "%d\n\n", ft_atoi_base("+++++++-ff", "0123456789abcdef"));
+	printf(GREEN "ft_atoi_base test 1 : "ITALIC YELLOW "%d\n\n", ft_atoi_base("+++++++--ffawb", "0123456789abcdef"));
+	printf(GREEN "ft_atoi_base test 2 : "ITALIC YELLOW "%d\n\n", ft_atoi_base("+++++++--ffa", "0123456789abcdef"));
+	printf(GREEN "ft_atoi_base test 3 : "ITALIC YELLOW "%d\n\n", ft_atoi_base("+-+-+--+-123456","01213456789"));
+	printf(GREEN "ft_atoi_base test 4 : "ITALIC YELLOW "%d\n\n", ft_atoi_base("+-+-+--+-123456a2", "0123456789"));
 
 	printf(LRED "=== TESTS D'ERREUR ===" RESET "\n\n");
 
 	printf(RED "Test 1: ft_write avec fd invalide (-1)" RESET "\n");
-	errno = 0; // Reset errno
+	errno = 0;
 	ssize_t result = ft_write(-1, "test", 4);
 	printf("ft_write result: %zd, errno: %d (%s)\n", result, errno, strerror(errno));
 	

@@ -20,7 +20,7 @@ CC = cc
 AR = ar
 
 # Flags
-ASMFLAGS = -felf64 -g 
+ASMFLAGS = -felf64 -g
 CFLAGS = -Wall -Wextra -Werror -g
 ARFLAGS = rcs
 

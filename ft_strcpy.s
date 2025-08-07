@@ -4,6 +4,9 @@ section .text
 	global ft_strcpy
 
 ft_strcpy:
+	push rbp
+	mov rbp, rsp
+
 	mov rax, rdi
 	mov rcx, 0
 	jmp loop
@@ -17,4 +20,5 @@ loop:
 	jmp loop
 
 exit:
+	leave
 	ret
