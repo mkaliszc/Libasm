@@ -1,8 +1,8 @@
 section .data
 
 section .text
-	global ft_read
-	extern __errno_location
+	global	ft_read
+	extern	__errno_location
 
 ft_read:
 	push rbp

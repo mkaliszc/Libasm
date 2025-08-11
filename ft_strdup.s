@@ -5,6 +5,7 @@ section .text
 	extern ft_strlen
 	extern ft_strcpy
 	extern malloc
+	extern __errno_location
 
 ft_strdup:
 	push rbp
@@ -29,6 +30,9 @@ ft_strdup:
 	ret
 
 error:
-	xor rax, rax
+	pop rdi
+	call __errno_location wrt ..plt
+	mov dword [rax], 12
 	leave
+	xor rax, rax
 	ret

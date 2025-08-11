@@ -1,0 +1,1 @@
+This test was written by ft_write
