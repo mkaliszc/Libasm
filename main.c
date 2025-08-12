@@ -99,15 +99,6 @@ int main(void)
 		std_result = read(closed_fd, read_buf, 10);
 		printf("read result: %zd, errno: %d (%s)\n", std_result, errno, strerror(errno));
 	}
-
-	printf(LGREEN"\n=== BONUS PART ===\n");
-
-	// t_list	*first;
-	// first->data =
 	
-	printf(GREEN "ft_atoi_base test 1 : "ITALIC YELLOW "%d\n", ft_atoi_base("+++++++--ffawb", "0123456789abcdef"));
-	printf(GREEN "ft_atoi_base test 2 : "ITALIC YELLOW "%d\n", ft_atoi_base("+++++++--ffa", "0123456789abcdef"));
-	printf(GREEN "ft_atoi_base test 3 : "ITALIC YELLOW "%d\n", ft_atoi_base("+-+-+--+-123456","01213456789"));
-	printf(GREEN "ft_atoi_base test 4 : "ITALIC YELLOW "%d\n\n", ft_atoi_base("+-+-+--+-123456a2", "0123456789"));
-	return 0;
+	return (0);
 }

@@ -1,12 +1,12 @@
 # pragma once
 
-# include "colors.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
 # include <fcntl.h>
 # include <errno.h>
+# include "colors.h"
 
 // * Mandatory part
 
@@ -23,9 +23,10 @@ char*	ft_strdup(const char *s);
 typedef struct s_list
 {
 	void			*data;
-	struct t_list	*next;
+	struct s_list	*next;
 }	t_list;
 	
 
 int		ft_atoi_base(char *str, char *base);
 void	ft_list_push_front(t_list **begin_list, void *data);
+int		ft_list_size(t_list *begin_list);

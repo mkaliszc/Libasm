@@ -1,4 +1,6 @@
 libasm.a
+bonus_libasm.a
+asm_bonus
 obj/
 asm
 *.o

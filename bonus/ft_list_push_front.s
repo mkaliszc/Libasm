@@ -1,11 +1,11 @@
 section .data
 
-section .text:
-	global	ft_lit_push_front
+section .text
+	global	ft_list_push_front
 	extern	malloc
 	extern	__errno_location
 
-ft_lit_push_front:
+ft_list_push_front:
 	push rbp
 	mov rbp, rsp
 
@@ -21,8 +21,10 @@ ft_lit_push_front:
 	pop rdi
 	pop rsi
 
-	mov [rax], rsi
-	
+	mov [rax], rsi 
+	mov rdx, [rdi]
+	mov [rax + 8], rdx
+	mov [rdi], rax
 
 	leave
 	ret
